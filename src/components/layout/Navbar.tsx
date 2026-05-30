@@ -2,16 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "About", href: "/about" },
-];
+import { usePathname } from "next/navigation";
+import { NAV_LINKS, CTA_LINK } from "@/lib/navigation";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -24,6 +21,8 @@ export default function Navbar() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   const elevated = scrolled || open;
 
@@ -41,6 +40,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
+            aria-label="Precision Prosthetics — home"
             className="flex items-baseline gap-1.5 text-[13px] uppercase tracking-[0.1em] text-gray-900 transition-opacity duration-300 hover:opacity-50"
           >
             <span className="font-medium">Precision</span>
@@ -48,30 +48,38 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-9">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link
-                key={href}
-                href={href}
-                className="text-[13px] font-normal tracking-[0.02em] text-gray-500 transition-colors duration-200 hover:text-gray-900"
-              >
-                {label}
-              </Link>
-            ))}
+          <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-9">
+            {NAV_LINKS.map(({ label, href }) => {
+              const active = pathname === href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  className={`text-[13px] font-normal tracking-[0.02em] transition-colors duration-200 hover:text-gray-900 ${
+                    active ? "text-gray-900" : "text-gray-500"
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA + hamburger */}
           <div className="flex items-center gap-5">
             <Link
-              href="/contact"
+              href={CTA_LINK.href}
               className="hidden md:inline-flex items-center rounded-full border border-gray-800 px-5 py-2 text-[12px] font-medium tracking-[0.05em] text-gray-900 transition-all duration-200 hover:bg-gray-900 hover:text-white"
             >
-              Contact Us
+              {CTA_LINK.label}
             </Link>
 
             <button
               onClick={() => setOpen(!open)}
               aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
               className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] md:hidden"
             >
               <span
@@ -97,29 +105,34 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
+        id="mobile-nav"
         className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-          open ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="border-t border-gray-100 bg-white/96 backdrop-blur-md">
-          <nav className="mx-auto max-w-7xl px-6 pb-7 pt-2">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="flex items-center border-b border-gray-50 py-4 text-[13px] font-normal tracking-[0.01em] text-gray-500 transition-colors duration-200 hover:text-gray-900"
-              >
-                {label}
-              </Link>
-            ))}
+          <nav aria-label="Mobile navigation" className="mx-auto max-w-7xl px-6 pb-7 pt-2">
+            {NAV_LINKS.map(({ label, href }) => {
+              const active = pathname === href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex items-center border-b border-gray-50 py-4 text-[13px] font-normal tracking-[0.01em] transition-colors duration-200 hover:text-gray-900 ${
+                    active ? "text-gray-900" : "text-gray-500"
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
             <div className="pt-5">
               <Link
-                href="/contact"
-                onClick={() => setOpen(false)}
+                href={CTA_LINK.href}
                 className="inline-flex w-full items-center justify-center rounded-full bg-gray-900 px-6 py-3 text-[12px] font-medium tracking-[0.05em] text-white transition-colors duration-200 hover:bg-gray-700"
               >
-                Contact Us
+                {CTA_LINK.label}
               </Link>
             </div>
           </nav>

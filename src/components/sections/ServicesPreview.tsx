@@ -1,31 +1,6 @@
 import Link from "next/link";
-
-const SERVICES = [
-  {
-    number: "01",
-    title: "Full Arch Restorations",
-    description:
-      "Complete implant-supported arches engineered for long-term stability, natural occlusion, and refined aesthetics.",
-  },
-  {
-    number: "02",
-    title: "Crowns & Bridges",
-    description:
-      "Individually crafted with precision-milled zirconia and feldspathic porcelain to match patient anatomy exactly.",
-  },
-  {
-    number: "03",
-    title: "Implant Prosthetics",
-    description:
-      "Custom abutments and prosthetic components designed for seamless integration with all major implant systems.",
-  },
-  {
-    number: "04",
-    title: "Digital CAD/CAM Design",
-    description:
-      "Advanced digital workflows from scan to delivery — faster turnaround, consistent results, fewer remakes.",
-  },
-];
+import { SERVICES } from "@/lib/services";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 export default function ServicesPreview() {
   return (
@@ -35,12 +10,7 @@ export default function ServicesPreview() {
         {/* Header */}
         <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-5 flex items-center gap-4">
-              <span className="h-px w-6 shrink-0 bg-gray-300" />
-              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-gray-400">
-                Our Services
-              </span>
-            </div>
+            <SectionEyebrow label="Our Services" />
             <h2 className="text-[34px] font-light leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[40px]">
               Precision at every
               <br />

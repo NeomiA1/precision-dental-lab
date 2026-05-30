@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CONTACT } from "@/lib/constants";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 export default function CTASection() {
   return (
@@ -7,14 +8,12 @@ export default function CTASection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mx-auto max-w-2xl text-center">
 
-          {/* Eyebrow */}
-          <div className="mb-8 flex items-center justify-center gap-4">
-            <span className="h-px w-6 shrink-0 bg-gray-700" />
-            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-gray-500">
-              Work With Us
-            </span>
-            <span className="h-px w-6 shrink-0 bg-gray-700" />
-          </div>
+          <SectionEyebrow
+            label="Work With Us"
+            variant="dark"
+            centered
+            className="mb-8"
+          />
 
           {/* Headline */}
           <h2 className="mb-6 text-[36px] font-light leading-[1.1] tracking-[-0.02em] text-white sm:text-[44px]">

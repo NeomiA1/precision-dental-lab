@@ -25,6 +25,8 @@ const REASONS = [
   },
 ];
 
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
+
 export default function WhyChooseUs() {
   return (
     <section className="bg-white py-24 lg:py-32">
@@ -32,12 +34,7 @@ export default function WhyChooseUs() {
 
         {/* Header */}
         <div className="mb-14 lg:mb-16">
-          <div className="mb-5 flex items-center gap-4">
-            <span className="h-px w-6 shrink-0 bg-gray-300" />
-            <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-gray-400">
-              Why Clinics Choose Us
-            </span>
-          </div>
+          <SectionEyebrow label="Why Clinics Choose Us" />
           <h2 className="max-w-lg text-[34px] font-light leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[40px]">
             Built around the
             <br />

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 const TRUST_ITEMS = [
   { stat: "3,000+", label: "Successful Cases" },
@@ -17,13 +18,7 @@ export default function Hero() {
           {/* ── Left: Copy ── */}
           <div className="flex flex-col">
 
-            {/* Eyebrow */}
-            <div className="mb-10 flex items-center gap-4">
-              <span className="h-px w-6 shrink-0 bg-gray-300" />
-              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-gray-400">
-                Fort Lauderdale Dental Laboratory
-              </span>
-            </div>
+            <SectionEyebrow label="Fort Lauderdale Dental Laboratory" className="mb-10" />
 
             {/* Headline */}
             <h1 className="mb-7 text-[44px] font-light leading-[1.06] tracking-[-0.025em] text-gray-900 sm:text-[52px] lg:text-[58px] xl:text-[64px]">
@@ -44,7 +39,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-5">
               <Link
-                href="/cases"
+                href="/portfolio"
                 className="inline-flex items-center rounded-full bg-gray-900 px-8 py-3.5 text-[13px] font-medium tracking-[0.03em] text-white transition-colors duration-200 hover:bg-gray-700"
               >
                 View Cases

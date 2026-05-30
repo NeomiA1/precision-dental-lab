@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 export default function AboutPreview() {
   return (
@@ -8,12 +9,7 @@ export default function AboutPreview() {
 
           {/* Left: Pull quote */}
           <div className="lg:sticky lg:top-28">
-            <div className="mb-8 flex items-center gap-4">
-              <span className="h-px w-6 shrink-0 bg-gray-300" />
-              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-gray-400">
-                About the Lab
-              </span>
-            </div>
+            <SectionEyebrow label="About the Lab" className="mb-8" />
             <blockquote className="text-[26px] font-light leading-[1.45] tracking-[-0.015em] text-gray-800 sm:text-[30px]">
               &ldquo;We treat every case as if it were our own restoration — with uncompromising attention to precision, material quality, and fit.&rdquo;
             </blockquote>
